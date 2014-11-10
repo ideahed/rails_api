@@ -1,5 +1,7 @@
 require 'rubygems'
 require 'factory_girl'
+require 'pry'
+require 'pry-debugger'
 
 module ResponseJSON
   def response_json

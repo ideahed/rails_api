@@ -23,25 +23,24 @@ end
 describe 'POST /v1/notes/id' do
   it 'saves the lat, lon, note text, note photo, recipients, and expiration' do
     date = Time.zone.now
-    devicetoken = '123abcd456xyz'
-    user = create(:user, devicetoken: devicetoken)
-    
+    user = create(:user)
+    binding.pry
     post '/v1/notes', {
-      user_id: user.id,
-      devicetoken: devicetoken,
+
+      user_id: user[:id],
       lat: 5.5,
       lon: 3.3,
+      photo_uri: 'MyString',
       note_text: 'Hey sweetie! Just thinking about your lovely face!',
-      photo_uri: 'http://www.photo.al;ksdfjla;sfjk.com',
       expiration: date,
     }.to_json, {'Content-Type' => 'application/json' }
-
+    
     note = Note.last
-    expect(response_json).to eq({ 'id' => note.id })
+    expect(response_json).to eq({ 'id' => note[:id] })
     expect(note.lat).to eq (5.5)
     expect(note.lon).to eq(3.3)
     expect(note_text).to eq('Hey sweetie! Just thinking about your lovely face!')
-    expect(note.photo_uri).to eq('http://www.photo.al;ksdfjla;sfjk.com')
+    expect(note.photo_uri).to eq('http://www.photour/l12345.jpg')
     expect(note.expiration.to_i).to eq date.to_i
 
   end

@@ -15,8 +15,7 @@ class Api::V1::NotesController < ApplicationController
 
   def note_params
     { 
-      user_id: user.id,
-      devicetoken: user.devicetoken,
+      user_id: user[:id],
       lat: params[:lat],
       lon: params[:lon],
       note_text: params[:note_text],
@@ -26,9 +25,7 @@ class Api::V1::NotesController < ApplicationController
   end
 
   def user
-    User.find_or_create_by(devicetoken: devicetoken)
+    User.find_or_create_by(user_id: user[:id])
   end
   
-  def devicetoken
-  end
 end

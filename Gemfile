@@ -14,13 +14,14 @@ gem 'oj'
 gem 'jbuilder', '~> 2.0'
 # bundle exec rake doc:rails generates the API under doc/api.
 gem 'sdoc', '~> 0.4.0',          group: :doc
-
 # Use unicorn as the app server
 # gem 'unicorn'
 
 group :development do
   gem 'binding_of_caller'
   gem 'foreman'
+  gem 'pry'
+  gem 'pry-debugger'
 end
 
 group :development, :test do
