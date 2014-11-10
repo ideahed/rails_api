@@ -1,6 +1,9 @@
 Lovemark::Application.routes.draw do
   scope module: :api, defaults: { format: 'json' } do
     namespace :v1 do ## resources will be here
+      namespace :notes do
+        resources :nearests, only: [:index]
+      end
       resources :notes, only: [:create, :show]
     end
 

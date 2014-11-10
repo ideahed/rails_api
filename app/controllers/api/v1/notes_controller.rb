@@ -5,9 +5,13 @@ class Api::V1::NotesController < ApplicationController
 
   def create
     @note = Note.new(note_params)
-
     if @note.save
       render
+    else
+      render json: {
+        message: 'Validation Failed',
+        errors: @note.errors.full_messages
+      }, status: 422
     end
   end
 
@@ -15,7 +19,7 @@ class Api::V1::NotesController < ApplicationController
 
   def note_params
     { 
-      user_id: user[:id],
+      user_id: user.id,
       lat: params[:lat],
       lon: params[:lon],
       note_text: params[:note_text],
@@ -25,7 +29,7 @@ class Api::V1::NotesController < ApplicationController
   end
 
   def user
-    User.find_or_create_by(user_id: user[:id])
+   user = User.find_or_create_by(id: params[:user_id])
   end
   
 end
