@@ -1,0 +1,10 @@
+development: 
+  radius = .01
+  units = km
+test:
+  radius = .01
+  units = km
+
+production: 
+  radius = .01
+  units = km
